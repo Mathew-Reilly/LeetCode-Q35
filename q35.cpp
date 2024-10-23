@@ -17,9 +17,10 @@ public:
     // To do a binary search we are going to take the total length and then
     // search by dividing the list in half
     int vecLength = nums.size();
-    int numIterations = ceil(log(vecLength));
+    // int numIterations = ceil(log(vecLength));
     // cout << vecLength;
     int midpoint = (vecLength / 2);
+    int change = midpoint;
 
     if (nums[0] >= target)
     {
@@ -30,25 +31,26 @@ public:
       return vecLength;
     }
 
-    for (int i = 0; i < numIterations; i++)
+    while (change > 0)
     {
-      if (nums[midpoint] == target)
+      change = ((midpoint) / 2.0);
+      if (nums[midpoint - 1] == target)
       {
         // cout << "midpoint early: " << midpoint << "\n";
         return midpoint;
       }
       else if (nums[midpoint] > target)
       {
-        midpoint = midpoint - ceil(midpoint / 2.0);
+        midpoint = midpoint - change;
       }
       else if (nums[midpoint] < target)
       {
-        midpoint = midpoint + ceil(midpoint / 2.0);
+        midpoint = midpoint + change;
       }
     }
 
     // cout << "location to place: " << midpoint - 1 << "\n";
-    return midpoint + 1;
+    return midpoint;
   }
 };
 
@@ -59,6 +61,7 @@ int main()
   v.push_back(1);
   v.push_back(3);
   v.push_back(5);
+  v.push_back(6);
   s.searchInsert(v, 2);
   return 0;
 }
