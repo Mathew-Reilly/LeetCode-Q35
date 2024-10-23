@@ -19,11 +19,15 @@ public:
     int vecLength = nums.capacity();
     int numIterations = ceil(log(vecLength));
     // cout << vecLength;
-    int midpoint = vecLength / 2;
+    int midpoint = (vecLength / 2);
 
     if (nums[0] > target)
     {
       return 0;
+    }
+    if (nums[vecLength - 1] < target)
+    {
+      return vecLength;
     }
 
     for (int i = 0; i < numIterations; i++)
@@ -35,16 +39,16 @@ public:
       }
       else if (nums[midpoint] > target)
       {
-        midpoint = midpoint - (midpoint / 2);
+        midpoint = midpoint - ceil(midpoint / 2.0);
       }
       else if (nums[midpoint] < target)
       {
-        midpoint = midpoint + (midpoint / 2);
+        midpoint = midpoint + ceil(midpoint / 2.0);
       }
     }
 
     // cout << "location to place: " << midpoint - 1 << "\n";
-    return midpoint;
+    return midpoint + 1;
   }
 };
 
@@ -56,6 +60,6 @@ int main()
   v.push_back(3);
   v.push_back(5);
   v.push_back(6);
-  s.searchInsert(v, 7);
+  s.searchInsert(v, 2);
   return 0;
 }
