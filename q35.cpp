@@ -29,11 +29,11 @@ public:
       }
       else if (nums[midpoint] > target)
       {
-        midpoint = midpoint - (midpoint / 2);
+        midpoint = midpoint - ceil(midpoint / 2.0);
       }
       else if (nums[midpoint] < target)
       {
-        midpoint = midpoint + (midpoint / 2);
+        midpoint = midpoint + ceil(midpoint / 2.0);
       }
     }
 
