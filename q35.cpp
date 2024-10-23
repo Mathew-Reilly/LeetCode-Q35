@@ -14,12 +14,18 @@ class Solution
 public:
   int searchInsert(vector<int> &nums, int target)
   {
-    // To do a binary search we are going to take the total length and then search by dividing the list in half
+    // To do a binary search we are going to take the total length and then
+    // search by dividing the list in half
     int vecLength = nums.capacity();
-    int index = 0;
     int numIterations = ceil(log(vecLength));
     // cout << vecLength;
     int midpoint = vecLength / 2;
+
+    if (nums[0] > target)
+    {
+      return 0;
+    }
+
     for (int i = 0; i < numIterations; i++)
     {
       if (nums[midpoint] == target)
@@ -29,15 +35,15 @@ public:
       }
       else if (nums[midpoint] > target)
       {
-        midpoint = midpoint - ceil(midpoint / 2.0);
+        midpoint = midpoint - (midpoint / 2);
       }
       else if (nums[midpoint] < target)
       {
-        midpoint = midpoint + ceil(midpoint / 2.0);
+        midpoint = midpoint + (midpoint / 2);
       }
     }
 
-    // cout << "location to place: " << midpoint << "\n";
+    // cout << "location to place: " << midpoint - 1 << "\n";
     return midpoint;
   }
 };
@@ -50,6 +56,6 @@ int main()
   v.push_back(3);
   v.push_back(5);
   v.push_back(6);
-  s.searchInsert(v, 5);
+  s.searchInsert(v, 7);
   return 0;
 }
