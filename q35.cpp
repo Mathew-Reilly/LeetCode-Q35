@@ -14,43 +14,40 @@ class Solution
 public:
   int searchInsert(vector<int> &nums, int target)
   {
-    // To do a binary search we are going to take the total length and then
-    // search by dividing the list in half
-    int vecLength = nums.size();
-    // int numIterations = ceil(log(vecLength));
-    // cout << vecLength;
-    int midpoint = (vecLength / 2);
-    int change = midpoint;
-
-    if (nums[0] >= target)
+    // First we need to do basic validations
+    if (nums.empty() || nums.size() == 0)
     {
       return 0;
     }
-    if (nums[vecLength - 1] < target)
+
+    // Then we need our basic variables
+    int median, left, right;
+
+    // set our initial leftmost and rightmost indexes
+    left = 0;
+    right = nums.size() - 1; // subtract 1 to get last index
+
+    // find the median repeatedly until the value is found or has failed to turn up
+    while (left <= right)
     {
-      return vecLength;
+      median = (left + right) / 2;
+
+      if (nums[median] < target)
+      {
+        left = median + 1;
+      }
+      else if (nums[median] > target)
+      {
+        right = median - 1;
+      }
+      else
+      {
+        return median;
+      }
     }
 
-    while (change > 0)
-    {
-      change = ((midpoint) / 2.0);
-      if (nums[midpoint - 1] == target)
-      {
-        // cout << "midpoint early: " << midpoint << "\n";
-        return midpoint;
-      }
-      else if (nums[midpoint] > target)
-      {
-        midpoint = midpoint - change;
-      }
-      else if (nums[midpoint] < target)
-      {
-        midpoint = midpoint + change;
-      }
-    }
-
-    // cout << "location to place: " << midpoint - 1 << "\n";
-    return midpoint;
+    // If the item is not found, place in the next index
+    return median + 1;
   }
 };
 
@@ -62,6 +59,6 @@ int main()
   v.push_back(3);
   v.push_back(5);
   v.push_back(6);
-  s.searchInsert(v, 2);
+  cout << "" << s.searchInsert(v, 5);
   return 0;
 }
