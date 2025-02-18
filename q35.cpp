@@ -47,7 +47,7 @@ public:
     }
 
     // If the item is not found do one last check to place in the correct index
-    return median < target ? median + 1 : median;
+    return nums[median] < target ? median + 1 : median;
   }
 };
 
