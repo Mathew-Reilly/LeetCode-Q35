@@ -31,7 +31,7 @@ public:
     while (left <= right)
     {
       // avoids overflow
-      median = (left + (right - left)) / 2;
+      median = left + (right - left) / 2;
 
       if (nums[median] < target)
       {
