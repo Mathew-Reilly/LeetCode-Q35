@@ -30,7 +30,8 @@ public:
     // find the median repeatedly until the value is found or has failed to turn up
     while (left <= right)
     {
-      median = (left + right) / 2;
+      // avoids overflow
+      median = (left + (right - left)) / 2;
 
       if (nums[median] < target)
       {
