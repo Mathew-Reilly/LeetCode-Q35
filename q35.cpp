@@ -46,8 +46,8 @@ public:
       }
     }
 
-    // If the item is not found, place in the next index
-    return median + 1;
+    // If the item is not found do one last check to place in the correct index
+    return median < target ? median + 1 : median;
   }
 };
 
